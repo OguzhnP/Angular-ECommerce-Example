@@ -22,7 +22,6 @@ export class ShopComponent implements OnInit {
     private productRepository: ProductRepository,
     private categoryRepository: CategoryRepository,
     private cart : Cart,
-    private router : Router,
   )
   {}
   ngOnInit(): void {
@@ -41,16 +40,23 @@ export class ShopComponent implements OnInit {
   get pageNumbers():number[] {
     return Array(Math.ceil(this.productRepository.getProducts(this.selectedCategory).length/this.productsPerPage)).fill(0).map((a,i)=>i+1);
     }
-  changeCategory(newCategory?: Category){
-    this.selectedCategory = newCategory;
-  }
+
 
   changePage(p : number){
     this.selectedPage = p;
   }
 
-  addProductToCart(product : Product)  {
-    this.cart.addItem(product);
+
+  changePageSize(event: Event){
+    const element = event.target as HTMLInputElement;
+    this.productsPerPage=Number(element.value);
+    this.selectedPage=1;
   }
 
+  getCategory(category : Category){
+    this.selectedCategory = category;
+  }
+  getPage(){
+      this.selectedPage=1;
+  }
 }
