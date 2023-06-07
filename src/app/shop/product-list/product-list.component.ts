@@ -9,6 +9,7 @@ import { Product } from 'src/app/model/product.model';
 })
 export class ProductListComponent {
   @Input() products : Product[] =[];
+  selectedProduct : Product =null;
 
   constructor(
     private cart : Cart,
@@ -17,4 +18,11 @@ export class ProductListComponent {
     this.cart.addItem(product);
   }
 
-}
+  displayDetails(product : Product) {
+    this.selectedProduct = product;
+  }
+  hideDetail(){
+    this.selectedProduct=null;
+  }
+
+  }
